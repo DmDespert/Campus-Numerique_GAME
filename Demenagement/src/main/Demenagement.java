@@ -2,18 +2,26 @@ package main;
 
 public class Demenagement {
 	public static void main (String [] args) {
-		 int i = 34;
+		int capaciteCamion = 9;
+		int cartonsCamion = 0;
+		int ancienLocal = 34;
+		int nouveauLocal = 0;
 		 
-		 while (i > 0) {
-			 if (i > 8) {
-				 System.out.print("Un voyage de 9 cartons a été effectué \n");
-				 
-				 i = i - 9; 
+		 while (ancienLocal > 0) {
+			 if (capaciteCamion > cartonsCamion && ancienLocal > 8) {
+				 cartonsCamion = capaciteCamion;
+				 System.out.println("Un voyage de " + cartonsCamion + " cartons a été effectué");
 			 }
 			 else {
-				 System.out.print("Un voyage de " + i + " cartons a été effectué \n");
-				 i = i - i;
+				 cartonsCamion = ancienLocal;
+				 System.out.println("Un voyage de " + cartonsCamion + " cartons a été effectué");
 			 }
+			 ancienLocal = ancienLocal - cartonsCamion;
+			 nouveauLocal = nouveauLocal + cartonsCamion;
+			 cartonsCamion = 0;
+			 
+			 System.out.println("Il reste " + ancienLocal + " cartons dans l'ancien local");
 		 }
+		 System.out.println("Il y a " + nouveauLocal + " cartons dans le nouveau local");
 	}
 }
