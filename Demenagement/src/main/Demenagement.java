@@ -1,3 +1,5 @@
+package main;
+
 public class Demenagement {
 	public static void main (String [] args) {
 		 int i = 34;
