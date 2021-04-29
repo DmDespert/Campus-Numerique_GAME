@@ -1,36 +1,17 @@
 package characters;
 
-public class Warrior {
+public class Warrior extends Characters {
 	
-	//Char name
-	private String name;
+	String weaponName = "";
+	int weaponDamage = 0;
 	
-	//Char default HP
-	private int health;
-	
-	//Max char HP (6)
-	private int maxHealth;
-	
-	//Char min attack power (8)
-	private int minAP;
-	
-	//Char max attack power (15)
-	private int maxAP;
-	
-	public Warrior() {
-		name = null;
-		health = 5;
-		minAP = 5;
+	//Constructor
+	public Warrior(String name) {
+		super(name, "Warrior", 5, 10, 5, 10);
 	}
 	
-	public Warrior(String name, int health, int minAP) {
-		name = this.name;
-		health = this.health;
-		minAP = this.minAP;
-	}
-	
-	public String toString() {
-		return name;
+	public void SorcererStuff() {
+		
 	}
 	
 }

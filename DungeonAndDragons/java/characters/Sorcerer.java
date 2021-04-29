@@ -1,32 +1,17 @@
 package characters;
 
-public class Sorcerer {
+public class Sorcerer extends Characters {
 	
-	//Char name
-	private String name;
+	String spellName = "";
+	int spellDamage = 0;
 	
-	//Char default HP
-	private int health;
-	
-	//Max char HP (6)
-	private int maxHealth;
-	
-	//Char min attack power (8)
-	private int minAP;
-	
-	//Char max attack power (15)
-	private int maxAP;
-	
-	public Sorcerer() {
-		name = null;
-		health = 3;
-		minAP = 8;
+	//Constructor
+	public Sorcerer(String name) {
+		super(name, "Sorcerer", 3, 6, 8, 15);
 	}
 	
-	public Sorcerer(String name, int health, int minAP) {
-		name = this.name;
-		health = this.health;
-		minAP = this.minAP;
+	public void SorcererStuff() {
+		
 	}
 	
 }
