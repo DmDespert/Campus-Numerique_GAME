@@ -10,7 +10,7 @@ public class Warrior extends Characters {
 		super(name, "Warrior", 5, 10, 5, 10);
 	}
 	
-	public void SorcererStuff() {
+	public void WarriorStuff() {
 		
 	}
 	

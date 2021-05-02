@@ -14,7 +14,7 @@ abstract public class Characters {
 	//Max char HP
 	private int maxHealth;
 	
-	//Char min attack power
+	//Char start attack power
 	private int minAP;
 	
 	//Char max attack power
@@ -29,7 +29,13 @@ abstract public class Characters {
 		this.minAP = minAP;
 		this.maxAP = maxAP;
 	}
+	
+	//Commons functions
+	public void walk() {
+		
+	}
 
+	//Getters & Setters
 	public String getName() {
 		return name;
 	}

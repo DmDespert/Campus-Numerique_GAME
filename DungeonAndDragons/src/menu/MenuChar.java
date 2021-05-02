@@ -5,21 +5,23 @@ import characters.Characters;
 import characters.Sorcerer;
 import characters.Warrior;
 
-//Import Enemies
-import enemies.Enemies;
-import enemies.Goblins;
-import enemies.Sorcerers;
-import enemies.Dragons;
-
 //Import scanner
 import java.util.Scanner;
 
-
-public class NewGame {
+public class MenuChar {
 	
-	Characters playerChar;
+	//Attributes
+	private Characters playerChar;
 	
-	public NewGame() {
+	//Constructor
+	public MenuChar() {
+		
+		this.playerChar = null;
+	
+	}
+	
+	//Commons functions
+	public void start() {
 		
 		//Globals
 		Scanner entries = new Scanner( System.in );
@@ -48,11 +50,19 @@ public class NewGame {
             	break;
             default :
             	System.out.println("Invalid class");
+            	break;
         }
 
         //Starting
         System.out.println("Good luck, hero.");
-	
+	}
+
+	public Characters getPlayerChar() {
+		return playerChar;
+	}
+
+	public void setPlayerChar(Characters playerChar) {
+		this.playerChar = playerChar;
 	}
 	
 }
