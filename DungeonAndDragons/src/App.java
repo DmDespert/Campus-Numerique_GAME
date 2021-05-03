@@ -9,7 +9,7 @@ public class App {
 		//Actions
 		Game game = new Game();
 		game.introduction();
-		game.stage1();
+		game.gameRunning();
 
 	}
 	

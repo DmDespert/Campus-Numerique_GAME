@@ -21,5 +21,12 @@ public class Dice {
 		System.out.println(dice);
 		
 	}
-	
+
+	public int getDice() {
+		return dice;
+	}
+
+	public void setDice(int dice) {
+		this.dice = dice;
+	}
 }

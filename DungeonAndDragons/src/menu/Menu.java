@@ -30,18 +30,21 @@ public class Menu {
 			playerChoice = entries.nextInt();
 			entries.nextLine();
 			
-			System.out.println(playerChoice);
-			
 			switch(playerChoice) {
 				
 				case 1:
 					menuChar.start();
 					break;
 				case 2:
-					//ExitGame ExitGame = new ExitGame();
-					System.out.println( "Game over" );
-					System.exit(0);
-					break;
+					System.out.println("Are you sure ? (1) Yes (2) No");
+					playerChoice = entries.nextInt();
+					if(playerChoice == 1) {
+						System.out.println( "Game over" );
+						System.exit(0);
+					}
+					else {
+						break;
+					}
 				default : 
 					System.out.println( "Wimp" );
 					break;
@@ -51,10 +54,12 @@ public class Menu {
 		}
 		
 	}
-	
-	public void gameMenu() {
-		
-		
+
+	public MenuChar getMenuChar() {
+		return menuChar;
 	}
-	
+
+	public void setMenuChar(MenuChar menuChar) {
+		this.menuChar = menuChar;
+	}
 }

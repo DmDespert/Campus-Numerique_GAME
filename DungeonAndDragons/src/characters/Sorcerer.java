@@ -1,44 +1,20 @@
 package characters;
 
 //Imports
-import stuff.Fireball;
-import stuff.Tunderbold;
+import stuff.Stuff;
 
 public class Sorcerer extends Characters {
-	
-	String spellName;
-	int spellDamage;
-	
-	String filter;
-	int filterDefense;
+
+	Stuff spell;
+	Stuff filter;
+	Stuff potion;
 	
 	//Constructor
-	public Sorcerer(String name) {
+	public Sorcerer(String name, Stuff spell, Stuff filter, Stuff potion) {
 		super(name, "Sorcerer", 3, 6, 8, 15);
-		this.spellDamage = 0;
-		this.filterDefense = 0;
+		this.spell = spell;
+		this.filter = filter;
+		this.potion = potion;
 	}
-	
-	public void basicAttack() {
-		
-	}
-	
-	public void spellAttack(String spellName, int spellDamage) {
-		this.spellName = spellName;
-		this.spellDamage = spellDamage;
-		
-		System.out.println("You attack with " + spellName + " spell and do " + spellDamage + " damages");
-	}
-	
-	public void defense(int filterDefense) {
-		this.filter = "Filter";
-		this.filterDefense = filterDefense;
-		
-		System.out.println("Filter saved you for " + filterDefense + " damges");
-	}
-	
-	public void SorcererStuff() {
-		
-	}
-	
+
 }
