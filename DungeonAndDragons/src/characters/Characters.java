@@ -1,5 +1,7 @@
 package characters;
 
+import stuff.Stuff;
+
 abstract public class Characters {
 	
 	//Char name
@@ -20,6 +22,8 @@ abstract public class Characters {
 	//Char max attack power
 	private int maxAP;
 
+	private int charPosition = 1;
+
 	//Constructor
 	public Characters(String name, String classType, int health, int maxHealth, int minAP, int maxAP) {
 		this.name = name;
@@ -29,11 +33,23 @@ abstract public class Characters {
 		this.minAP = minAP;
 		this.maxAP = maxAP;
 	}
-	
+
 	//Commons functions
-	public void walk() {
-		
+
+	public int walk(int dice) {
+		this.charPosition = this.charPosition + dice;
+		return dice;
 	}
+
+	public int getCharPosition() {
+		return charPosition;
+	}
+
+	public void setCharPosition(int charPosition) {
+		this.charPosition = charPosition;
+	}
+
+	public abstract int attack(int weapon);
 
 	//Getters & Setters
 	public String getName() {

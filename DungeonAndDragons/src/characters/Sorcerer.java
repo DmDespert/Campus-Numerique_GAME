@@ -17,4 +17,10 @@ public class Sorcerer extends Characters {
 		this.potion = potion;
 	}
 
+	@Override
+	public int attack(int spell) {
+		int attackAmount = spell + getMinAP();
+		return attackAmount;
+	}
+
 }

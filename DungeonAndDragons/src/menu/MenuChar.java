@@ -5,6 +5,8 @@ import characters.Characters;
 import characters.Sorcerer;
 import characters.Warrior;
 import stuff.Stuff;
+import stuff.Default;
+import utils.Utils;
 
 //Import scanner
 import java.util.Scanner;
@@ -20,16 +22,19 @@ public class MenuChar {
 	private Stuff filter;
 
 	private Stuff potion;
+
+	Utils utl;
 	
 	//Constructor
 	public MenuChar() {
 		
 		this.playerChar = null;
-		this.weapon = null;
-		this.shield = null;
-		this.spell = null;
-		this.filter = null;
-		this.potion = null;
+		this.weapon = new Default();
+		this.shield = new Default();
+		this.spell = new Default();
+		this.filter = new Default();
+		this.potion = new Default();
+		this.utl = new Utils();
 	
 	}
 	
@@ -40,10 +45,10 @@ public class MenuChar {
 		Scanner entries = new Scanner( System.in );
 		
 		//Game Start
-		System.out.println( "*** Dungeons & Dragons ***" );
+		utl.print( "*** Dungeons & Dragons ***" );
 	        
 		//Name choice
-        System.out.println( "Please, choose a  name : " );
+        utl.print( "Please, choose a  name : " );
         String playerName = entries.nextLine();
 
 		//Starting game menu
@@ -52,36 +57,28 @@ public class MenuChar {
 		while(playerClass != 1 && playerClass != 2) {
 
 			//Class choice
-			System.out.println( "Please, choose a class : (1)Warrior (2)Sorcerer : " );
-			playerClass = entries.nextInt();
-			entries.nextLine();
+			playerClass = utl.intQuestion("Please, choose a class : (1)Warrior (2)Sorcerer : ");
 
 			switch (playerClass) {
 				case 1:
 					this.playerChar = new Warrior(playerName, weapon, shield, potion);
-					this.weapon = null;
-					this.shield = null;
-					this.potion = null;
-					System.out.println("Welcome warrior " + playerChar.getName() + ". Ready to go ?");
-					System.out.println("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
+					utl.print("Welcome warrior " + playerChar.getName() + ". Ready to go ?");
+					utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
 					break;
 				case 2:
 					this.playerChar = new Sorcerer(playerName, spell, filter, potion);
-					this.spell = null;
-					this.filter = null;
-					this.potion = null;
-					System.out.println("Welcome sorcerer " + playerChar.getName() + ". Ready to go ?");
-					System.out.println("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
+					utl.print("Welcome sorcerer " + playerChar.getName() + ". Ready to go ?");
+					utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
 					break;
 				default:
-					System.out.println("Invalid class");
+					utl.print("Invalid class, you became a coconut.");
 					break;
 			}
 
 		}
 
         //Starting
-        System.out.println("Good luck, hero.");
+        utl.print("Good luck, hero.");
 	}
 
 	public Characters getPlayerChar() {

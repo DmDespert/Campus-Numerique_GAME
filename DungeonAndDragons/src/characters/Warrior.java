@@ -15,4 +15,33 @@ public class Warrior extends Characters {
 		this.potion = potion;
 	}
 
+	@Override
+	public int attack(int weapon) {
+		int attackAmount = weapon + getMinAP();
+		return attackAmount;
+	}
+
+	public Stuff getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Stuff weapon) {
+		this.weapon = weapon;
+	}
+
+	public Stuff getShield() {
+		return shield;
+	}
+
+	public void setShield(Stuff shield) {
+		this.shield = shield;
+	}
+
+	public Stuff getPotion() {
+		return potion;
+	}
+
+	public void setPotion(Stuff potion) {
+		this.potion = potion;
+	}
 }

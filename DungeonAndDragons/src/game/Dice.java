@@ -10,15 +10,14 @@ public class Dice {
 		
 	}
 	
-	public void rollingDice() {
+	public int rollingDice() {
 		
 		int min = 1;
 		int max = 6;
 		int rand = min + (int)(Math.random() * ((max - min) + 1));
 		
 		dice = rand;
-		
-		System.out.println(dice);
+		return dice;
 		
 	}
 
