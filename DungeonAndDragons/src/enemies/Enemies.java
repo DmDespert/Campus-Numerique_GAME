@@ -1,6 +1,8 @@
 package enemies;
 
-public class Enemies {
+import map.Slot;
+
+public class Enemies extends Slot {
 	
 	//Enemy name
 	private String name;

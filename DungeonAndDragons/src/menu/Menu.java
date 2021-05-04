@@ -1,10 +1,12 @@
 package menu;
 
 //Imports
+import map.Slot;
 import stuff.Fireball;
 import stuff.Mace;
 import utils.Utils;
 import game.Dice;
+import map.Map;
 
 public class Menu {
 	
@@ -12,12 +14,14 @@ public class Menu {
 	MenuChar menuChar;
 	Utils utl;
 	Dice dice;
+	Map map;
 	
 	//Constructor
 	public Menu() {
 		this.menuChar = new MenuChar();
 		this.utl = new Utils();
 		this.dice = new Dice();
+		this.map = new Map();
 	}
 	
 	//Commons functions
@@ -67,9 +71,9 @@ public class Menu {
 				case 1:
 					utl.print("Dice score : " + getMenuChar().getPlayerChar().walk(dice.rollingDice()));
 
-					if(getMenuChar().getPlayerChar().getCharPosition() < 64) {
+					if(getMenuChar().getPlayerChar().getCharPosition() < map.getMaxBox()) {
 						Thread.sleep(150);
-						utl.print("You go to the case number " + getMenuChar().getPlayerChar().getCharPosition());
+						utl.print("You go to the box number " + getMenuChar().getPlayerChar().getCharPosition());
 					}
 					else {
 						utl.print("The end : you runned to fast, splashed your ass on a wall and died stupidly.");
@@ -82,7 +86,7 @@ public class Menu {
 					utl.print("Class : " + isClass);
 					utl.print("AP : " + isAP);
 					utl.print("HP(s) : " + isHP);
-					utl.print("Case position : " + getMenuChar().getPlayerChar().getCharPosition());
+					utl.print("Map position : " + getMenuChar().getPlayerChar().getCharPosition());
 					if(getMenuChar().getWeapon() != null && isClass == "Warrior") {
 						utl.print("Weapon : " + getMenuChar().getWeapon().getName());
 						utl.print("Weapon damage : " + getMenuChar().getWeapon().getAmount());

@@ -1,23 +1,10 @@
 package game;
 
 //Imports
+import enemies.*;
 import menu.Menu;
 import utils.Utils;
-
-//Stuffs warrior
-import stuff.Mace;
-import stuff.Sword;
-
-//Stuffs sorcerer
-import stuff.Tunderbold;
-import stuff.Fireball;
-
-//Stuffs for all
-import stuff.GreatPotion;
-import stuff.SmallPotion;
-import sun.lwawt.macosx.CSystemTray;
-
-import java.util.Scanner;
+import map.Map;
 
 public class Game {
 
@@ -25,6 +12,12 @@ public class Game {
 	Menu menu;
 	Dice dice;
 	Utils utl;
+	Map map;
+
+	//Enemies init
+	Enemies dragon;
+	Enemies sorcerers;
+	Enemies goblins;
 
 	//Constructor
 	public Game() {
@@ -32,6 +25,12 @@ public class Game {
 		this.menu = new Menu();
 		this.dice = new Dice();
 		this.utl = new Utils();
+		this.map = new Map();
+
+		//Enemies construct
+		this.dragon = new Dragons();
+		this.sorcerers = new Sorcerers();
+		this.goblins = new Goblins();
 
 	}
 
@@ -58,15 +57,9 @@ public class Game {
 	//All the game's running here
 	public void gameRunning() {
 
-		//Usefull attributes
-		String isName = menu.getMenuChar().getPlayerChar().getName();
-		String isClass = menu.getMenuChar().getPlayerChar().getClassType();
-		int isAP = menu.getMenuChar().getPlayerChar().getMinAP();
-		int isHP = menu.getMenuChar().getPlayerChar().getHealth();
-
 		//First stage
-		int map = 64;
-		int playerPosition = 1;
+		map.generateRandomCase(menu.getMenuChar().getPlayerChar().getClassType());
+		int playerPosition = menu.getMenuChar().getPlayerChar().getCharPosition();
 
 		switch(utl.intQuestion("Now, near a door to enter the dungeon you ask yourself : what should i do ? (1) Enter (2) Run away like a wimp.")) {
 
@@ -82,8 +75,8 @@ public class Game {
 				}
 
 				//Everything happen here !
-				while(map > playerPosition) {
-					//All events and new map() object
+				while(map.getMaxBox() > playerPosition) {
+					//All events
 					menu.runMenu();
 				}
 				break;
@@ -99,4 +92,5 @@ public class Game {
 				break;
 		}
 	}
+
 }

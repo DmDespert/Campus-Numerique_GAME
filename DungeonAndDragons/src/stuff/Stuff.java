@@ -1,6 +1,8 @@
 package stuff;
 
-abstract public class Stuff {
+import map.Slot;
+
+abstract public class Stuff extends Slot {
 	
 	private String name;
 	private int amount;
