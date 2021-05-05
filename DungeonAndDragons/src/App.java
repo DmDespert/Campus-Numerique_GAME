@@ -9,6 +9,7 @@ public class App {
 		//Actions
 		Game game = new Game();
 		game.introduction();
+		game.generateMap();
 		game.gameRunning();
 
 	}

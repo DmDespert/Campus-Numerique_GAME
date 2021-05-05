@@ -1,7 +1,6 @@
 package map;
 
 //Imports
-import characters.Characters;
 import stuff.*;
 import utils.Utils;
 import enemies.*;
@@ -20,8 +19,6 @@ public class Map extends Slot {
 
     //Constructor
     public Map() {
-
-        this.utl = new Utils();
 
         this.generatedMap = new ArrayList<Slot>();
         this.maxBox = 64;
@@ -92,18 +89,6 @@ public class Map extends Slot {
                     utl.print("Nothing happen.");
                     break;
             }
-        }
-    }
-
-
-    public void fightEvent(Enemies enemies) {
-        utl.print("You fight versus " + enemies.getName());
-        utl.print("Enemie HP(s) : " + enemies.getHealth());
-        utl.print("Enemie AP : " + enemies.getEnemyAP());
-
-        while(enemies.getHealth() > 0) {
-            utl.print("Fight");
-            enemies.setHealth(enemies.getHealth()-1);
         }
     }
 

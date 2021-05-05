@@ -38,7 +38,7 @@ abstract public class Characters {
 
 	public int walk(int dice) {
 		this.charPosition = this.charPosition + dice;
-		return dice;
+		return charPosition;
 	}
 
 	public int getCharPosition() {
