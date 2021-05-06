@@ -4,7 +4,7 @@ public class Brozock extends Enemies {
 
     public Brozock() {
 
-        super("Brozock big boss", 34, 5);
+        super("Brozock big boss", 32, 4);
 
     }
 

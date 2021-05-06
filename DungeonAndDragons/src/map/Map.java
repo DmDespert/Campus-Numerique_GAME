@@ -25,14 +25,7 @@ public class Map extends Slot {
 
     }
 
-    public int getMaxBox() {
-        return maxBox;
-    }
-
-    public List<Slot> getGeneratedMap() {
-        return generatedMap;
-    }
-
+    //Commons & Overrides
     public void generateRandomCase(String currentCharType) {
         for(int i=0; i<maxBox; i++) {
             int randomCase = utl.random();
@@ -65,21 +58,36 @@ public class Map extends Slot {
                     if(currentCharType == "Sorcerer") {
                         generatedMap.add(new Tunderbolt());
                     }
-                    else {
+                    if(currentCharType == "Warrior") {
                         generatedMap.add(new Mace());
+                    }
+                    else {
+                        generatedMap.add(new SmallPotion());
                     }
                     break;
                 case 10:
                     if(currentCharType == "Sorcerer") {
                         generatedMap.add(new Fireball());
                     }
-                    else {
+                    if(currentCharType == "Warrior") {
                         generatedMap.add(new Sword());
+                    }
+                    else {
+                        generatedMap.add(new CoconutFriends());
                     }
                     break;
             }
         }
         generatedMap.add(new Brozock());
+    }
+
+    //Getters & Setters
+    public int getMaxBox() {
+        return maxBox;
+    }
+
+    public List<Slot> getGeneratedMap() {
+        return generatedMap;
     }
 
 }

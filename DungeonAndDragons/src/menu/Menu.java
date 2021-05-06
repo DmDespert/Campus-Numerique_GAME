@@ -8,14 +8,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    Utils utl;
-    Stuff weapon;
-    Stuff spell;
-
-    Stuff shield;
-    Stuff filter;
-
-    Stuff potion;
+    private Utils utl;
 
     //Constructor
     public Menu() {
@@ -41,7 +34,7 @@ public class Menu {
                     break;
                 case 2:
                     if (utl.intQuestion("Are you sure ? (1) Yes (2) No") == 1) {
-                        utl.print("Game over");
+                        utl.print("---------------------------------------GAME OVER--------------------------------------");
                         System.exit(0);
                     } else {
                         break;
@@ -64,36 +57,39 @@ public class Menu {
         Scanner entries = new Scanner( System.in );
 
         //Game Start
-        utl.print( "      *** THIS IS ***" );
-        utl.print( "*** Dungeons & Dragons ***" );
-        utl.print( "       *** GAME ***" );
+        utl.print( "*** This is the ***" );
+        utl.print( "*** DUNGEONS & DRAGONS ***" );
+        utl.print( "*** GAME ***" );
 
         //Name choice
-        utl.print("---------NEW CHAR---------");
-        utl.print( "Please, choose a  name : " );
+        utl.print("-----------------------------------CREATE NEW CHAR----------------------------------");
+        utl.print( "SELECT A NAME: " );
         String playerName = entries.nextLine();
 
         //Starting game menu
         int playerClass = 0;
 
-        while(playerClass != 1 && playerClass != 2) {
+        while(playerClass != 1 && playerClass != 2 && playerClass != 3) {
 
             //Class choice
-            playerClass = utl.intQuestion("Please, choose a class : (1)Warrior (2)Sorcerer : ");
+            utl.print("SELECT A CLASS: ");
+            playerClass = utl.intQuestion("(1) Warrior -- (2) Sorcerer");
 
             switch (playerClass) {
                 case 1:
-                    playerChar = new Warrior(playerName, weapon = new Default(), shield = new Shield(), potion = new Default());
+                    playerChar = new Warrior(playerName, new Default(), new Shield(), new Default());
                     utl.print("Welcome warrior " + playerChar.getName() + ". Ready to go ?");
                     utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
                     break;
                 case 2:
-                    playerChar = new Sorcerer(playerName, spell = new Default(), filter = new Filter(), potion = new Default());
+                    playerChar = new Sorcerer(playerName, new Default(), new Filter(), new Default());
                     utl.print("Welcome sorcerer " + playerChar.getName() + ". Ready to go ?");
                     utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
                     break;
                 default:
                     utl.print("Invalid class, you became a coconut.");
+                    playerChar = new Coconut(playerName, new Default(), new CoconutSkin(), new Default());
+                    playerClass = 3;
                     break;
             }
 
@@ -124,14 +120,18 @@ public class Menu {
                 utl.print("HP(s) : " + isHP);
                 utl.print("Map position : " + playerChar.getCharPosition());
 
-                if (weapon != null && isClass == "Warrior") {
-                    utl.print("Weapon : " + getWeapon().getName());
-                    utl.print("Weapon damage : " + getWeapon().getAmount());
-                    utl.print("Shield defense : " + getShield().getAmount());
-                } else if (getSpell() != null && isClass == "Sorcerer") {
-                    utl.print("Spell : " + getSpell().getName());
-                    utl.print("Spell damage : " + getSpell().getAmount());
-                    utl.print("Filter defense : " + getFilter().getAmount());
+                if (playerChar != null && playerChar instanceof Warrior && ((Warrior) playerChar).getWeapon() != null) {
+                    utl.print("Weapon : " + ((Warrior) playerChar).getWeapon().getName());
+                    utl.print("Weapon damage : " + ((Warrior) playerChar).getWeapon().getAmount());
+                    utl.print("Shield defense : " + ((Warrior) playerChar).getShield().getAmount());
+                } else if (playerChar != null && playerChar instanceof Sorcerer && ((Sorcerer) playerChar).getSpell() != null) {
+                    utl.print("Spell : " + ((Sorcerer) playerChar).getSpell().getName());
+                    utl.print("Spell damage : " + ((Sorcerer) playerChar).getSpell().getAmount());
+                    utl.print("Filter defense : " + ((Sorcerer) playerChar).getFilter().getAmount());
+                } else {
+                    utl.print("Coconut capacity: " + ((Coconut) playerChar).getCoconutWeapon().getName());
+                    utl.print("Coconut friends : " + ((Coconut) playerChar).getCoconutWeapon().getAmount());
+                    utl.print("Coconut defense : " + ((Coconut) playerChar).getCoconutSkin().getAmount());
                 }
 
                 break;
@@ -163,16 +163,19 @@ public class Menu {
         return playerChoice;
     }
 
-    public int equipStuff(Stuff stuff) {
+    public int equipStuff(Stuff stuff, Characters playerChar) {
         int playerChoice = utl.intQuestion("(1) Equip (2) Don't equip");
 
         switch(playerChoice) {
             case 1:
                 if(stuff.getName() == "Mace" || stuff.getName() == "Sword") {
-                    setWeapon(stuff);
+                    ((Warrior) playerChar).setWeapon(stuff);
                 }
                 else if(stuff.getName() == "Tunderbolt" || stuff.getName() == "Fireball") {
-                    setSpell(stuff);
+                    ((Sorcerer) playerChar).setSpell(stuff);
+                }
+                else if (stuff.getName() == "Coconuts invasion") {
+                    ((Coconut) playerChar).setCoconutWeapon(stuff);
                 }
                 break;
             case 2:
@@ -180,45 +183,5 @@ public class Menu {
         }
 
         return playerChoice;
-    }
-
-    public Stuff getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Stuff weapon) {
-        this.weapon = weapon;
-    }
-
-    public Stuff getSpell() {
-        return spell;
-    }
-
-    public void setSpell(Stuff spell) {
-        this.spell = spell;
-    }
-
-    public Stuff getShield() {
-        return shield;
-    }
-
-    public void setShield(Stuff shield) {
-        this.shield = shield;
-    }
-
-    public Stuff getFilter() {
-        return filter;
-    }
-
-    public void setFilter(Stuff filter) {
-        this.filter = filter;
-    }
-
-    public Stuff getPotion() {
-        return potion;
-    }
-
-    public void setPotion(Stuff potion) {
-        this.potion = potion;
     }
 }

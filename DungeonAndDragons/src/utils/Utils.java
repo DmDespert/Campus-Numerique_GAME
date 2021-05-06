@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Utils {
 
     //Attributes
-    public Scanner entries;
+    private Scanner entries;
 
     //Constructor
     public Utils() {

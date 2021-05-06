@@ -8,7 +8,6 @@ public class Sorcerer extends Characters {
 	private Stuff spell;
 	private Stuff filter;
 	private Stuff potion;
-
 	
 	//Constructor
 	public Sorcerer(String name, Stuff spell, Stuff filter, Stuff potion) {
@@ -18,12 +17,14 @@ public class Sorcerer extends Characters {
 		this.potion = potion;
 	}
 
+	//Commons & Overrides
 	@Override
 	public int attack(int spell) {
 		int attackAmount = spell + getMinAP();
 		return attackAmount;
 	}
 
+	//Getters & Setters
 	public Stuff getSpell() {
 		return spell;
 	}
