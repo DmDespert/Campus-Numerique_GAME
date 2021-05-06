@@ -1,6 +1,6 @@
 package characters;
 
-import stuff.Stuff;
+import utils.Utils;
 
 abstract public class Characters {
 	
@@ -24,6 +24,8 @@ abstract public class Characters {
 
 	private int charPosition = 1;
 
+	Utils utl;
+
 	//Constructor
 	public Characters(String name, String classType, int health, int maxHealth, int minAP, int maxAP) {
 		this.name = name;
@@ -32,6 +34,7 @@ abstract public class Characters {
 		this.maxHealth = maxHealth;
 		this.minAP = minAP;
 		this.maxAP = maxAP;
+		this.utl = new Utils();
 	}
 
 	//Commons functions
@@ -39,6 +42,29 @@ abstract public class Characters {
 	public int walk(int dice) {
 		this.charPosition = this.charPosition + dice;
 		return charPosition;
+	}
+
+	public int defense() {
+		int blockChances = utl.random();
+		int defenseAmount;
+		switch(blockChances) {
+			case 1:
+				defenseAmount = 4;
+				break;
+			case 2:
+				defenseAmount = 3;
+				break;
+			case 3:
+				defenseAmount = 2;
+				break;
+			case 4:
+				defenseAmount = 1;
+				break;
+			default :
+				defenseAmount = 0;
+		}
+
+		return defenseAmount;
 	}
 
 	public int getCharPosition() {

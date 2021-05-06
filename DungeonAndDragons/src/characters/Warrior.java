@@ -44,4 +44,5 @@ public class Warrior extends Characters {
 	public void setPotion(Stuff potion) {
 		this.potion = potion;
 	}
+
 }

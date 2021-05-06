@@ -4,7 +4,7 @@ public class GreatPotion extends Stuff {
 	
 	public GreatPotion() {
 		
-		super("Great Potion", 5);
+		super("Great life potion", 5);
 	
 	}
 	

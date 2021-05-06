@@ -1,27 +1,31 @@
 package menu;
 
 //Imports
-import stuff.Fireball;
-import stuff.Mace;
+import characters.*;
+import stuff.*;
 import utils.Utils;
-import game.Dice;
+import java.util.Scanner;
 
 public class Menu {
 
-    //Attributes
-    MenuChar menuChar;
     Utils utl;
-    Dice dice;
+    Stuff weapon;
+    Stuff spell;
+
+    Stuff shield;
+    Stuff filter;
+
+    Stuff potion;
 
     //Constructor
     public Menu() {
-        this.menuChar = new MenuChar();
+
         this.utl = new Utils();
-        this.dice = new Dice();
+
     }
 
     //Commons functions
-    public void startMenu() {
+    public int startMenu() {
 
         //Starting game menu
         int playerChoice = 0;
@@ -33,7 +37,7 @@ public class Menu {
             switch (playerChoice) {
 
                 case 1:
-                    menuChar.start();
+                    playerChoice = 1;
                     break;
                 case 2:
                     if (utl.intQuestion("Are you sure ? (1) Yes (2) No") == 1) {
@@ -47,65 +51,174 @@ public class Menu {
                     break;
 
             }
-
         }
+        return playerChoice;
 
     }
 
-    public void runMenu() {
+    public Characters createChar(Characters playerChar) {
 
-        String isName = getMenuChar().getPlayerChar().getName();
-        String isClass = getMenuChar().getPlayerChar().getClassType();
-        int isAP = getMenuChar().getPlayerChar().getMinAP();
-        int isHP = getMenuChar().getPlayerChar().getHealth();
+        playerChar = null;
 
-        switch (utl.intQuestion("(1) Roll Dice -- (2) See char stats -- (3)  Exit -- (4) Equip new weapon -- (5) Attack")) {
+        //Globals
+        Scanner entries = new Scanner( System.in );
+
+        //Game Start
+        utl.print( "      *** THIS IS ***" );
+        utl.print( "*** Dungeons & Dragons ***" );
+        utl.print( "       *** GAME ***" );
+
+        //Name choice
+        utl.print("---------NEW CHAR---------");
+        utl.print( "Please, choose a  name : " );
+        String playerName = entries.nextLine();
+
+        //Starting game menu
+        int playerClass = 0;
+
+        while(playerClass != 1 && playerClass != 2) {
+
+            //Class choice
+            playerClass = utl.intQuestion("Please, choose a class : (1)Warrior (2)Sorcerer : ");
+
+            switch (playerClass) {
+                case 1:
+                    playerChar = new Warrior(playerName, weapon = new Default(), shield = new Shield(), potion = new Default());
+                    utl.print("Welcome warrior " + playerChar.getName() + ". Ready to go ?");
+                    utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
+                    break;
+                case 2:
+                    playerChar = new Sorcerer(playerName, spell = new Default(), filter = new Filter(), potion = new Default());
+                    utl.print("Welcome sorcerer " + playerChar.getName() + ". Ready to go ?");
+                    utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
+                    break;
+                default:
+                    utl.print("Invalid class, you became a coconut.");
+                    break;
+            }
+
+        }
+
+        //Starting
+        utl.print("Good luck, hero.");
+        return playerChar;
+    }
+
+    public int runMenu(Characters playerChar) {
+
+        int playerChoice = 0;
+
+        String isName = playerChar.getName();
+        String isClass = playerChar.getClassType();
+        int isAP = playerChar.getMinAP();
+        int isHP = playerChar.getHealth();
+
+        switch (utl.intQuestion("(1) Go on -- (2) See char stats -- (3) Exit")) {
             case 1:
-                getMenuChar().getPlayerChar().walk(dice.rollingDice());
-                utl.print("Dice score : " + dice.getDice());
+                playerChoice = 1;
                 break;
             case 2:
                 utl.print("Name : " + isName);
                 utl.print("Class : " + isClass);
                 utl.print("AP : " + isAP);
                 utl.print("HP(s) : " + isHP);
-                utl.print("Map position : " + getMenuChar().getPlayerChar().getCharPosition());
-                if (getMenuChar().getWeapon() != null && isClass == "Warrior") {
-                    utl.print("Weapon : " + getMenuChar().getWeapon().getName());
-                    utl.print("Weapon damage : " + getMenuChar().getWeapon().getAmount());
-                } else if (getMenuChar().getWeapon() != null && isClass == "Sorcerer") {
-                    utl.print("Spell : " + getMenuChar().getWeapon().getName());
-                    utl.print("Spell damage : " + getMenuChar().getWeapon().getAmount());
+                utl.print("Map position : " + playerChar.getCharPosition());
+
+                if (weapon != null && isClass == "Warrior") {
+                    utl.print("Weapon : " + getWeapon().getName());
+                    utl.print("Weapon damage : " + getWeapon().getAmount());
+                    utl.print("Shield defense : " + getShield().getAmount());
+                } else if (getSpell() != null && isClass == "Sorcerer") {
+                    utl.print("Spell : " + getSpell().getName());
+                    utl.print("Spell damage : " + getSpell().getAmount());
+                    utl.print("Filter defense : " + getFilter().getAmount());
                 }
+
                 break;
             case 3:
                 if (utl.intQuestion("Are you sure ? (1) Yes (2) No") == 1) {
-                    startMenu();
+                    playerChoice = 2;
                     break;
                 } else {
                     break;
                 }
-            case 4:
-                if (isClass == "Warrior") {
-                    getMenuChar().setWeapon(new Mace());
-                    break;
-                }
-                if (isClass == "Sorcerer") {
-                    getMenuChar().setWeapon(new Fireball());
-                    break;
-                }
-            case 5:
-                utl.print("You hit for : " + getMenuChar().getPlayerChar().attack(getMenuChar().getWeapon().getAmount()) + " damages.");
+        }
+
+        return playerChoice;
+
+    }
+
+    public int fightMenu() {
+        int playerChoice = utl.intQuestion("(1) Attack (2) Run away");
+
+        switch(playerChoice) {
+            case 1:
+                utl.print("Attacking");
+                break;
+            case 2:
+                utl.print("You run away");
                 break;
         }
 
+        return playerChoice;
     }
 
-    public MenuChar getMenuChar() {
-        return menuChar;
+    public int equipStuff(Stuff stuff) {
+        int playerChoice = utl.intQuestion("(1) Equip (2) Don't equip");
+
+        switch(playerChoice) {
+            case 1:
+                if(stuff.getName() == "Mace" || stuff.getName() == "Sword") {
+                    setWeapon(stuff);
+                }
+                else if(stuff.getName() == "Tunderbolt" || stuff.getName() == "Fireball") {
+                    setSpell(stuff);
+                }
+                break;
+            case 2:
+                break;
+        }
+
+        return playerChoice;
     }
 
-    public void setMenuChar(MenuChar menuChar) {
-        this.menuChar = menuChar;
+    public Stuff getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Stuff weapon) {
+        this.weapon = weapon;
+    }
+
+    public Stuff getSpell() {
+        return spell;
+    }
+
+    public void setSpell(Stuff spell) {
+        this.spell = spell;
+    }
+
+    public Stuff getShield() {
+        return shield;
+    }
+
+    public void setShield(Stuff shield) {
+        this.shield = shield;
+    }
+
+    public Stuff getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Stuff filter) {
+        this.filter = filter;
+    }
+
+    public Stuff getPotion() {
+        return potion;
+    }
+
+    public void setPotion(Stuff potion) {
+        this.potion = potion;
     }
 }

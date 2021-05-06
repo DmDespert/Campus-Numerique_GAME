@@ -5,9 +5,10 @@ import stuff.Stuff;
 
 public class Sorcerer extends Characters {
 
-	Stuff spell;
-	Stuff filter;
-	Stuff potion;
+	private Stuff spell;
+	private Stuff filter;
+	private Stuff potion;
+
 	
 	//Constructor
 	public Sorcerer(String name, Stuff spell, Stuff filter, Stuff potion) {
@@ -23,4 +24,27 @@ public class Sorcerer extends Characters {
 		return attackAmount;
 	}
 
+	public Stuff getSpell() {
+		return spell;
+	}
+
+	public void setSpell(Stuff spell) {
+		this.spell = spell;
+	}
+
+	public Stuff getFilter() {
+		return filter;
+	}
+
+	public void setFilter(Stuff filter) {
+		this.filter = filter;
+	}
+
+	public Stuff getPotion() {
+		return potion;
+	}
+
+	public void setPotion(Stuff potion) {
+		this.potion = potion;
+	}
 }

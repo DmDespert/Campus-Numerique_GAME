@@ -23,13 +23,4 @@ public class Utils {
         System.out.println(question);
     }
 
-    public int random() {
-        int min = 1;
-        int max = 10;
-        int range = max - min +1;
-        int rand = (int) (Math.random() * range) + min;
-
-        return rand;
-    }
-
 }
