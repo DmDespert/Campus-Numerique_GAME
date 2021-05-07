@@ -54,6 +54,7 @@ public class Game {
     public void generateMap() {
         this.map = new Map();
         map.generateRandomCase(playerChar.getClassType());
+        utl.print(map.getGeneratedMap().toString());
     }
 
     //Game core
@@ -101,7 +102,7 @@ public class Game {
 
                                     } else {
                                         try {
-                                            playerChar.setCharPosition(65);
+                                            playerChar.setCharPosition(64);
                                             utl.print("You reach the light ! It's near ! The exit, finally.");
                                             Thread.sleep(4500);
                                             utl.print("*** bm... ***");
@@ -114,6 +115,7 @@ public class Game {
                                             Thread.sleep(3500);
                                             utl.print("You cannot run away !!");
                                             Thread.sleep(1500);
+                                            utl.print("----------------------------------------BOSS----------------------------------------");
                                             fightEvent((Enemies) map.getGeneratedMap().get(playerChar.getCharPosition()));
                                             Thread.sleep(1500);
                                             utl.print("Euuurhgggg.... blrlblppp... .");
@@ -121,9 +123,7 @@ public class Game {
                                             utl.print("Blg....");
                                             Thread.sleep(1000);
                                             utl.print("The end : The boss is dead, and you won : became rich and full of honor as a great " + playerChar.getClassType() + ".");
-                                            if(menu.startMenu() == 1) {
-                                                introduction();
-                                            }
+                                            introduction();
                                             break;
                                         }
                                         catch(InterruptedException ex) {
@@ -186,9 +186,10 @@ public class Game {
                     if(playerChar.getClassType() == "Sorcerer") {
                         enemies.setHealth(enemies.getHealth() - playerChar.attack(((Sorcerer) playerChar).getSpell().getAmount()));
                         utl.print(enemies.getName() + " lost " + playerChar.attack(((Sorcerer) playerChar).getSpell().getAmount()) + " HP's");
-                    } else {
+                    }
+                    if(playerChar.getClassType() == "Coconut") {
                         enemies.setHealth(enemies.getHealth() - playerChar.attack(((Coconut) playerChar).getCoconutWeapon().getAmount()));
-                        utl.print(enemies.getName() + " lost " + playerChar.attack(playerChar.getMinAP()) + " HP's");
+                        utl.print(enemies.getName() + " lost " + playerChar.attack(((Coconut) playerChar).getCoconutWeapon().getAmount()) + " HP's");
                     }
                     if(enemies.getHealth() > 0) {
                         utl.print(enemies.getName() + " is still alive, and hit you for " + enemies.getEnemyAP() + " damages");

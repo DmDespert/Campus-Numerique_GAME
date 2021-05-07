@@ -27,7 +27,7 @@ public class Map extends Slot {
 
     //Commons & Overrides
     public void generateRandomCase(String currentCharType) {
-        for(int i=0; i<maxBox; i++) {
+        for(int i=1; i<maxBox; i++) {
             int randomCase = utl.random();
             switch(randomCase) {
                 case 1:
@@ -57,9 +57,11 @@ public class Map extends Slot {
                 case 9:
                     if(currentCharType == "Sorcerer") {
                         generatedMap.add(new Tunderbolt());
+                        break;
                     }
                     if(currentCharType == "Warrior") {
                         generatedMap.add(new Mace());
+                        break;
                     }
                     else {
                         generatedMap.add(new SmallPotion());
@@ -68,14 +70,16 @@ public class Map extends Slot {
                 case 10:
                     if(currentCharType == "Sorcerer") {
                         generatedMap.add(new Fireball());
+                        break;
                     }
-                    if(currentCharType == "Warrior") {
+                    else if(currentCharType == "Warrior") {
                         generatedMap.add(new Sword());
+                        break;
                     }
-                    else {
+                    else if(currentCharType == "Coconut") {
                         generatedMap.add(new CoconutFriends());
+                        break;
                     }
-                    break;
             }
         }
         generatedMap.add(new Brozock());
