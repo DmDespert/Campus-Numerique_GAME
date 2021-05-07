@@ -120,7 +120,7 @@ public class Game {
                                             Thread.sleep(4000);
                                             utl.print("Blg....");
                                             Thread.sleep(1000);
-                                            utl.print("The end : The boss is dead, and you won : became rich and full of honor.");
+                                            utl.print("The end : The boss is dead, and you won : became rich and full of honor as a great " + playerChar.getClassType() + ".");
                                             if(menu.startMenu() == 1) {
                                                 introduction();
                                             }
@@ -187,7 +187,7 @@ public class Game {
                         enemies.setHealth(enemies.getHealth() - playerChar.attack(((Sorcerer) playerChar).getSpell().getAmount()));
                         utl.print(enemies.getName() + " lost " + playerChar.attack(((Sorcerer) playerChar).getSpell().getAmount()) + " HP's");
                     } else {
-                        enemies.setHealth(enemies.getHealth() - playerChar.attack(playerChar.getMinAP()));
+                        enemies.setHealth(enemies.getHealth() - playerChar.attack(((Coconut) playerChar).getCoconutWeapon().getAmount()));
                         utl.print(enemies.getName() + " lost " + playerChar.attack(playerChar.getMinAP()) + " HP's");
                     }
                     if(enemies.getHealth() > 0) {

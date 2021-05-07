@@ -20,7 +20,7 @@ public class Coconut extends Characters {
     //Commons & Overrides
     @Override
     public int attack(int spell) {
-        int attackAmount = getMinAP();
+        int attackAmount = getMinAP() + spell;
         return attackAmount;
     }
 
