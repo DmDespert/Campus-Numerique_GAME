@@ -22,7 +22,7 @@ public class Utils {
                 answer = Integer.parseInt(entries.nextLine());
                 break;
             } catch (NumberFormatException nfe) {
-                System.out.print("He's dead, jim. Redo : ");
+                System.out.print("He's dead, jim. Try again : ");
             }
         }
         return answer;
