@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Utils {
 
     //Attributes
-    private Scanner entries;
+    private static Scanner entries;
 
     //Constructor
     public Utils() {
@@ -14,7 +14,7 @@ public class Utils {
     }
 
     //Common functions
-    public int intQuestion(String question) {
+    public static int intQuestion(String question) {
         int answer;
         while(true) {
             try {
@@ -22,7 +22,7 @@ public class Utils {
                 answer = Integer.parseInt(entries.nextLine());
                 break;
             } catch (NumberFormatException nfe) {
-                System.out.print("He's dead, jim. Try again : ");
+                System.out.print("Nope, only number ! : ");
             }
         }
         return answer;

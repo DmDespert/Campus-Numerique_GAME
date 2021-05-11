@@ -36,8 +36,8 @@ public class Game {
     public void introduction() {
         try {
             Thread.sleep(1000);
-            utl.print("-------------------------------------INTRODUCTION-------------------------------------");
-            utl.print("You appear in a step, at night * * *, near the sea and see a dungeon.");
+            utl.print("-------------------------------------INTRODUCTION-------------------------------------\n" +
+                    "You appear in a step, at night * * *, near the sea and see a dungeon.");
             Thread.sleep(3000);
             utl.print("You walk slowly to it, inside the darkness.");
             Thread.sleep(3000);
@@ -65,8 +65,8 @@ public class Game {
         try {
 
             Thread.sleep(3000);
-            utl.print("After a long walk, you reach a door to enter the dungeon and ask yourself :");
-            utl.print("What should i do ?");
+            utl.print("After a long walk, you reach a door to enter the dungeon and ask yourself : \n" +
+                    "What should i do ?");
             switch (utl.intQuestion("(1) Enter -- (2) Run away like a wimp.")) {
 
                 case 1:
@@ -74,8 +74,8 @@ public class Game {
                     try {
                         utl.print("----------------------------------------DUNGEON----------------------------------------");
                         Thread.sleep(3000);
-                        utl.print("The door screw while you open it, and a long dark corridor appear behind you.");
-                        utl.print("It's time to go, hero.");
+                        utl.print("The door screw while you open it, and a long dark corridor appear behind you. \n" +
+                                "It's time to go, hero.");
                     } catch (InterruptedException ex) {
                         System.out.println(ex);
                     }
@@ -90,7 +90,7 @@ public class Game {
 
                                 try {
                                     if (playerChar.getCharPosition() >= map.getMaxBox()) {
-                                        playerChar.setCharPosition(64);
+                                        playerChar.setCharPosition(map.getMaxBox() - 1);
                                     }
                                     Thread.sleep(150);
                                     utl.print("You go to the slot number " + playerChar.getCharPosition());
@@ -99,13 +99,13 @@ public class Game {
                                     currentSlot.action(playerChar);
 
                                     if (playerChar.getHealth() <= 0) {
-                                        utl.print("You died.");
+                                        utl.print("You died. \n---------------------------------------GAME OVER---------------------------------------");
                                         if (menu.startMenu() == 1) {
                                             introduction();
                                         }
                                     }
 
-                                    if(playerChar.getCharPosition() == 64 && playerChar.getHealth() > 0) {
+                                    if (playerChar.getCharPosition() == map.getMaxBox() - 1 && playerChar.getHealth() > 0) {
                                         utl.print("Euuuurghgghgh....blbllb....");
                                         Thread.sleep(1500);
                                         utl.print("bl...... .");
@@ -114,9 +114,19 @@ public class Game {
                                         Thread.sleep(1500);
                                         utl.print("You became strong and rich, full of honor as a great " + playerChar.getClassType() + " named " + playerChar.getName());
                                         Thread.sleep(3000);
+                                        utl.print("Producted by : Me, and it cost me a lot");
+                                        Thread.sleep(2000);
+                                        utl.print("Music by DmDespert (listen this silence, i worked hard)");
+                                        Thread.sleep(2000);
+                                        utl.print("Main role by " + playerChar.getName());
+                                        Thread.sleep(2000);
+                                        utl.print("Thanks to " + playerChar.getName());
+                                        Thread.sleep(2000);
+                                        utl.print("And Brad Pitt, but i don't know why...");
+                                        Thread.sleep(2000);
+                                        utl.print("Credit : DmDespert @Github");
+                                        Thread.sleep(3000);
                                         utl.print("The end");
-                                        Thread.sleep(1500);
-                                        utl.print("Credits : DmDespert @Github");
                                         introduction();
                                     }
 
@@ -139,8 +149,9 @@ public class Game {
                     break;
 
                 default:
-                    utl.print("You stayed here, undecide, for 38 years, near a door... ");
-                    utl.print("And died at 72 years old alone and poor.");
+                    utl.print("You stayed here, undecided, for 38 years, near a door... \n" +
+                            "And died at 72 years old alone and poor.");
+
                     if (menu.startMenu() == 1) {
                         introduction();
                     }

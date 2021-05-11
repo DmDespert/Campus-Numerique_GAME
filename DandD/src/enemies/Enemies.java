@@ -31,7 +31,10 @@ public class Enemies extends Slot {
 	}
 
 	public void action(Characters playerChar) {
-		fightEvent(playerChar);
+		utl.print("------------------------------------------FIGHT----------------------------------------\n" +
+				"You fight versus " + this.getName() + "\n" +
+				"Enemie AP : " + this.getEnemyAP());
+		duringFight(playerChar);
 	}
 
 	//Encounter enemies events
@@ -48,20 +51,6 @@ public class Enemies extends Slot {
 		}
 
 		return playerChoice;
-	}
-
-	public void fightEvent(Characters playerChar) {
-
-		if(this.getName() != "Brozock") {
-			utl.print("------------------------------------------FIGHT----------------------------------------");
-			utl.print("You fight versus " + this.getName());
-			utl.print("Enemie AP : " + this.getEnemyAP());
-			duringFight(playerChar);
-		}
-		else {
-			bossEvent(playerChar);
-		}
-
 	}
 
 	public void duringFight(Characters playerChar) {
@@ -87,15 +76,14 @@ public class Enemies extends Slot {
 					}
 					if(this.getHealth() > 0) {
 						utl.print(this.getName() + " is still alive, and hit you for " + this.getEnemyAP() + " damages");
-						int defense = playerChar.defense();
-						utl.print("You defended yourself for " + defense + " damage(s)");
+						int defense = playerChar.defense(Game.getDice().rollingDice());
 						int finalHit = this.getEnemyAP() - defense;
 						if(finalHit < 0) {
 							finalHit = 0;
 						}
 						playerChar.setHealth(playerChar.getHealth() - finalHit);
-						utl.print("You lost : " + finalHit + " HP's");
-						utl.print("Your HP's : " + playerChar.getHealth());
+						utl.print("You lost : " + finalHit + " HP's \n" +
+								"Your HP's : " + playerChar.getHealth());
 
 
 					} else {
@@ -120,28 +108,6 @@ public class Enemies extends Slot {
 					break;
 			}
 
-		}
-	}
-
-	public void bossEvent(Characters playerChar) {
-		try {
-			utl.print("You reach the light ! It's near ! The exit, finally.");
-			Thread.sleep(4500);
-			utl.print("*** bm... ***");
-			Thread.sleep(2300);
-			utl.print("*** Bom... ***");
-			Thread.sleep(2300);
-			utl.print("*** BOOM... ***");
-			Thread.sleep(2300);
-			utl.print("What the hell ?? A fucking big monster crashed the wall and he's near you now");
-			Thread.sleep(3500);
-			utl.print("You cannot run away !!");
-			Thread.sleep(1500);
-			utl.print("----------------------------------------BOSS----------------------------------------");
-			duringFight(playerChar);
-		}
-		catch(InterruptedException ex) {
-			System.out.print(ex);
 		}
 	}
 

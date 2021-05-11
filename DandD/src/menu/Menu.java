@@ -57,13 +57,11 @@ public class Menu {
         Scanner entries = new Scanner( System.in );
 
         //Game Start
-        utl.print( "*** This is the ***" );
-        utl.print( "*** DUNGEONS & DRAGONS ***" );
-        utl.print( "*** GAME ***" );
+        utl.print( "*** This is the *** \n*** DUNGEONS & DRAGONS ***\n*** GAME ***" );
 
         //Name choice
-        utl.print("-----------------------------------CREATE NEW CHAR----------------------------------");
-        utl.print( "SELECT A NAME: " );
+        utl.print("-----------------------------------CREATE NEW CHAR----------------------------------\n" +
+                "SELECT A NAME: ");
         String playerName = entries.nextLine();
 
         //Starting game menu
@@ -78,13 +76,9 @@ public class Menu {
             switch (playerClass) {
                 case 1:
                     playerChar = new Warrior(playerName, new Default(), new Shield(), new Default());
-                    utl.print("Welcome warrior " + playerChar.getName() + ". Ready to go ?");
-                    utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
                     break;
                 case 2:
                     playerChar = new Sorcerer(playerName, new Default(), new Filter(), new Default());
-                    utl.print("Welcome sorcerer " + playerChar.getName() + ". Ready to go ?");
-                    utl.print("Here's your stats : " + playerChar.getHealth() + " health points (HP) / " + playerChar.getMinAP() + " attack power(AP).");
                     break;
                 default:
                     utl.print("Invalid class, you became a coconut.");
@@ -92,11 +86,14 @@ public class Menu {
                     playerClass = 3;
                     break;
             }
+            utl.print("Welcome " + playerChar.getClassType() + " " + playerChar.getName() + ". Ready to go ?" + "\n" +
+                    "Here's your stats : " + playerChar.getHealth() + " health points (HP) / " +
+                    playerChar.getMinAP() + " attack power(AP).");
 
         }
 
         //Starting
-        utl.print("Good luck, hero.");
+        utl.print("Good luck, " + playerChar.getClassType() + ".");
         return playerChar;
     }
 
@@ -114,24 +111,24 @@ public class Menu {
                 playerChoice = 1;
                 break;
             case 2:
-                utl.print("Name : " + isName);
-                utl.print("Class : " + isClass);
-                utl.print("AP : " + isAP);
-                utl.print("HP(s) : " + isHP);
-                utl.print("Map position : " + playerChar.getCharPosition());
+                utl.print("Name : " + isName + "\n" +
+                        "Class : " + isClass + "\n" +
+                        "AP : " + isAP + "\n" +
+                        "HP(s) : " + isHP + "\n" +
+                        "Map position : " + playerChar.getCharPosition());
 
                 if (playerChar != null && playerChar instanceof Warrior && ((Warrior) playerChar).getWeapon() != null) {
-                    utl.print("Weapon : " + ((Warrior) playerChar).getWeapon().getName());
-                    utl.print("Weapon damage : " + ((Warrior) playerChar).getWeapon().getAmount());
-                    utl.print("Shield defense : " + ((Warrior) playerChar).getShield().getAmount());
+                    utl.print("Weapon : " + ((Warrior) playerChar).getWeapon().getName() + "\n" +
+                            "Weapon damage : " + ((Warrior) playerChar).getWeapon().getAmount() + "\n" +
+                            "Shield defense : " + ((Warrior) playerChar).getShield().getAmount());
                 } else if (playerChar != null && playerChar instanceof Sorcerer && ((Sorcerer) playerChar).getSpell() != null) {
-                    utl.print("Spell : " + ((Sorcerer) playerChar).getSpell().getName());
-                    utl.print("Spell damage : " + ((Sorcerer) playerChar).getSpell().getAmount());
-                    utl.print("Filter defense : " + ((Sorcerer) playerChar).getFilter().getAmount());
+                    utl.print("Spell : " + ((Sorcerer) playerChar).getSpell().getName() + "\n" +
+                            "Spell damage : " + ((Sorcerer) playerChar).getSpell().getAmount() + "\n" +
+                            "Filter defense : " + ((Sorcerer) playerChar).getFilter().getAmount());
                 } else {
-                    utl.print("Coconut capacity: " + ((Coconut) playerChar).getCoconutWeapon().getName());
-                    utl.print("Coconut friends : " + ((Coconut) playerChar).getCoconutWeapon().getAmount());
-                    utl.print("Coconut defense : " + ((Coconut) playerChar).getCoconutSkin().getAmount());
+                    utl.print("Coconut capacity: " + ((Coconut) playerChar).getCoconutWeapon().getName() + "\n" +
+                            "Coconut friends : " + ((Coconut) playerChar).getCoconutWeapon().getAmount() + "\n" +
+                            "Coconut defense : " + ((Coconut) playerChar).getCoconutSkin().getAmount());
                 }
 
                 break;

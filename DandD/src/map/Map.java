@@ -32,17 +32,11 @@ public class Map extends Slot {
             int randomCase = utl.random();
             switch(randomCase) {
                 case 1:
-                    generatedMap.add(new Goblins());
-                    break;
                 case 2:
-                    generatedMap.add(new Goblins());
-                    break;
                 case 3:
                     generatedMap.add(new Goblins());
                     break;
                 case 4:
-                    generatedMap.add(new Sorcerers());
-                    break;
                 case 5:
                     generatedMap.add(new Sorcerers());
                     break;

@@ -45,26 +45,23 @@ abstract public class Characters {
 		return charPosition;
 	}
 
-	public int defense() {
-		int blockChances = utl.random();
-		int defenseAmount;
-		switch(blockChances) {
-			case 1:
+	public int defense(int dice) {
+		int defenseAmount = 0;
+		switch(dice) {
+			case 6:
 				defenseAmount = 4;
 				break;
-			case 2:
+			case 5:
 				defenseAmount = 3;
 				break;
-			case 3:
-				defenseAmount = 2;
-				break;
 			case 4:
-				defenseAmount = 1;
+				defenseAmount = 2;
 				break;
 			default :
 				defenseAmount = 0;
 		}
-
+		utl.print("Dice score for defense " + dice);
+		utl.print("You defended your ass for " + defenseAmount + " damages");
 		return defenseAmount;
 	}
 
