@@ -17,7 +17,7 @@ public class Map extends Slot {
 
     //Attributes of Map
     private List<Slot> generatedMap;
-    private int maxBox;
+    private int maxMapSlot;
 
     Utils utl;
 
@@ -28,15 +28,15 @@ public class Map extends Slot {
         this.utl = new Utils();
 
         //Change this to make the map bigger
-        this.maxBox = 65;
+        this.maxMapSlot = 65;
 
     }
 
     /**Commons functions of Map**/
 
     /**Function called to generate randomly the wall map : based on selected class for stuffs.**/
-    public void generateRandomCase(String currentCharType) {
-        for(int i=1; i<maxBox; i++) {
+    public void generateRandomSlot(String currentCharType) {
+        for(int i=1; i<maxMapSlot; i++) {
             int randomCase = utl.random();
             switch(randomCase) {
                 //Goblins generate chance
@@ -99,7 +99,7 @@ public class Map extends Slot {
 
     /**Getters & Setters**/
     public int getMaxBox() {
-        return maxBox;
+        return maxMapSlot;
     }
     public List<Slot> getGeneratedMap() {
         return generatedMap;

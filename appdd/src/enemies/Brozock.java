@@ -16,7 +16,10 @@ public class Brozock extends Enemies {
 
     }
 
-    /**Load specific story when brozock is coming**/
+    /**
+     * Load specific story when brozock is coming
+     * @param playerChar
+     */
     public void action(Characters playerChar) {
         try {
             utl.print("You reach the light ! It's near ! The exit, finally.\nWooohoo !!");

@@ -22,7 +22,7 @@ public class Game {
     private Map map;
     private Utils utl;
     private Menu menu;
-    private static Dice dice;
+    private static Dice dice = new Dice();
 
     /**Constructors of Game**/
     public Game() {
@@ -31,7 +31,6 @@ public class Game {
 
         this.utl = new Utils();
         this.menu = new Menu();
-        this.dice = new Dice();
 
     }
 
@@ -60,13 +59,17 @@ public class Game {
         }
     }
 
-    /**Map random generator function, will generate the full map before start but after char creation.**/
+    /**
+     * Map random generator function, will generate the full map before start but after char creation.
+     **/
     public void generateMap() {
         this.map = new Map();
-        map.generateRandomCase(playerChar.getClassType());
+        map.generateRandomSlot(playerChar.getClassType());
     }
 
-    /**Game core playing function, threads sleep are used here for immersion, contain map slots events reactions**/
+    /**
+     * Game core playing function, threads sleep are used here for immersion, contain map slots events reactions
+     **/
     public void gameRun() {
 
         try {
@@ -103,7 +106,7 @@ public class Game {
                     }
 
                     //Everything happen here !
-                    while (map.getMaxBox() > playerChar.getCharPosition()) {
+                    while (gameProcess()) {
 
                         switch (menu.runMenu(playerChar)) {
                             case 1:
@@ -185,6 +188,10 @@ public class Game {
             System.out.println(ex);
         }
 
+    }
+
+    public boolean gameProcess() {
+        return map.getMaxBox() > playerChar.getCharPosition(); /* && playerChar.getHealth() > 0;*/
     }
 
     /**Getters & Setters**/
