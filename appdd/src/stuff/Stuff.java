@@ -3,43 +3,48 @@
  */
 package stuff;
 
-//Imports in Stuff
-import characters.Characters;
-import characters.Coconut;
-import characters.Sorcerer;
-import characters.Warrior;
+import characters.*;
 import map.Slot;
 import utils.Utils;
 
-/**Abstract class for all stuffs**/
+/**
+ * Abstract class for all stuffs
+ */
 abstract public class Stuff extends Slot {
 
-	/**Attributes of Stuff**/
-	private String name;
-	private int amount;
+	private String weaponName;
+	private int weaponAmount;
 
 	private Utils utl;
 
-	/**Constructors of Stuff**/
+	/**
+	 * Constructors of Stuff
+	 * @param name
+	 * @param amount
+	 */
 	public Stuff(String name, int amount) {
-		this.name = name;
-		this.amount = amount;
+		this.weaponName = name;
+		this.weaponAmount = amount;
 		this.utl = new Utils();
 	}
 
-	/**Commons functions of Stuff**/
-
-	/**Catch the stuff slot to interact & launch stuffEvent()**/
+	/**
+	 * Catch the stuff slot to interact & launch stuffEvent()
+	 * @param playerChar
+	 */
 	public void action(Characters playerChar) {
-		utl.print("You found " + this.getName());
+		utl.print("You found " + this.getWeaponName());
 		stuffEvent(playerChar);
 	}
 
-	/**On slot stuff interaction - call the method to let the player choose to equip or not.**/
+	/**
+	 * On slot stuff interaction - call the method to let the player choose to equip or not.
+	 * @param playerChar
+	 */
 	public void stuffEvent(Characters playerChar) {
-		utl.print("Provided : " + getAmount());
-		if(equipStuff(playerChar) == 1 && getName() == "\uD83D\uDD3A Small life potion" || getName() == "\uD83D\uDD34 Great life potion") {
-			playerChar.setHealth(playerChar.getHealth() + getAmount());
+		utl.print("\u2B06\uFE0F Provided : " + getWeaponAmount());
+		if(equipStuff(playerChar) == 1 && getWeaponName() == "\uD83D\uDD3A Small life potion" || getWeaponName() == "\uD83D\uDD34 Great life potion") {
+			playerChar.setHealth(playerChar.getHealth() + getWeaponAmount());
 			if(playerChar.getHealth() > playerChar.getMaxHealth()) {
 				playerChar.setHealth(playerChar.getMaxHealth());
 			}
@@ -47,19 +52,23 @@ abstract public class Stuff extends Slot {
 
 	}
 
-	/**Method to equip or not the stuff.**/
+	/**
+	 * Method to equip or not the stuff.
+	 * @param playerChar
+	 * @return
+	 */
 	public int equipStuff(Characters playerChar) {
 		int playerChoice = utl.intQuestion("(1) Equip (2) Don't equip");
 
 		switch(playerChoice) {
 			case 1:
-				if(getName() == "\uD83D\uDD28 Mace" || getName() == "\uD83D\uDDE1\uFE0F Sword") {
+				if(getWeaponName() == "Mace" || getWeaponName() == "Sword") {
 					((Warrior) playerChar).setWeapon(this);
 				}
-				else if(getName() == "\u26A1 Tunderbolt" || getName() == "\uD83D\uDD25 Fireball") {
+				else if(getWeaponName() == "Tunderbolt" || getWeaponName() == "Fireball") {
 					((Sorcerer) playerChar).setSpell(this);
 				}
-				else if (getName() == "Coconuts invasion") {
+				else if (getWeaponName() == "Coconuts invasion") {
 					((Coconut) playerChar).setCoconutWeapon(this);
 				}
 				break;
@@ -70,18 +79,19 @@ abstract public class Stuff extends Slot {
 		return playerChoice;
 	}
 
-	/**Getters & Setters**/
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAmount() {
-		return amount;
-	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public String getWeaponName() {
+		return weaponName;
 	}
 
+	public void setWeaponName(String weaponName) {
+		this.weaponName = weaponName;
+	}
+
+	public int getWeaponAmount() {
+		return weaponAmount;
+	}
+
+	public void setWeaponAmount(int weaponAmount) {
+		this.weaponAmount = weaponAmount;
+	}
 }

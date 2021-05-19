@@ -1,14 +1,22 @@
 package characters;
 import stuff.Stuff;
 
-/**Warrior characters class**/
+/**
+ * Warrior characters class
+ */
 public class Warrior extends Characters {
 
 	Stuff weapon;
 	Stuff shield;
 	Stuff potion;
-	
-	/**Constructor**/
+
+	/**
+	 * Warrior Constructor
+	 * @param name
+	 * @param weapon
+	 * @param shield
+	 * @param potion
+	 */
 	public Warrior(String name, Stuff weapon, Stuff shield, Stuff potion) {
 		super(name, "Warrior", 5, 14, 5, 10);
 		this.weapon = weapon;
@@ -16,16 +24,15 @@ public class Warrior extends Characters {
 		this.potion = potion;
 	}
 
-	/**Commons & Overrides**/
-
 	@Override
-	/**Specific class attack**/
+	/**
+	 * Specific class attack
+	 */
 	public int attack(int weapon) {
 		int attackAmount = weapon + getMinAP();
 		return attackAmount;
 	}
 
-	/**Getters & Setters**/
 	public Stuff getWeapon() { return weapon; }
 	public void setWeapon(Stuff weapon) { this.weapon = weapon; }
 	public Stuff getShield() { return shield; }

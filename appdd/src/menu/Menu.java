@@ -9,31 +9,32 @@ import utils.Utils;
 
 import java.util.Scanner;
 
-/**Contain all interaction function with the player**/
+/**
+ * Contain all interaction function with the player
+ */
 public class Menu {
 
     private Utils utl;
 
-    /**Constructors of Menu**/
     public Menu() {
-
         this.utl = new Utils();
-
     }
 
-    /**Commons functions**/
-
-    /**New game or exit game menu**/
+    /**
+     * New game or exit game menu
+     * @return
+     */
     public int startMenu() {
 
         //Starting game menu
         int playerChoice = 0;
 
-        while (playerChoice != 1 && playerChoice != 2) {
+        while (playerChoice != 1 && playerChoice != 2 && playerChoice != 3) {
 
             playerChoice = utl.intQuestion("===========================================\n" +
                     "(1) New Game\n" +
-                    "(2) Exit game\n" +
+                    "(2) Load game\n" +
+                    "(3) Exit game\n" +
                     "===========================================");
 
             switch (playerChoice) {
@@ -42,6 +43,9 @@ public class Menu {
                     playerChoice = 1;
                     break;
                 case 2:
+                    playerChoice = 2;
+                    break;
+                case 3:
                     if (utl.intQuestion("===========================================\n" +
                             "Are you sure ?\n" +
                             "(1) Yes\n" +
@@ -64,7 +68,11 @@ public class Menu {
 
     }
 
-    /**Create char menu**/
+    /**
+     * Create char menu
+     * @param playerChar
+     * @return
+     */
     public Characters createChar(Characters playerChar) {
 
         playerChar = null;
@@ -118,7 +126,11 @@ public class Menu {
         return playerChar;
     }
 
-    /**Menu displaying while playing, call the walk method, allow to see char stats, or exit the game**/
+    /**
+     * Menu displaying while playing, call the walk method, allow to see char stats, or exit the game
+     * @param playerChar
+     * @return
+     */
     public int runMenu(Characters playerChar) {
 
         int playerChoice = 0;
@@ -146,17 +158,17 @@ public class Menu {
                         "Map position : " + playerChar.getCharPosition());
 
                 if (playerChar != null && playerChar instanceof Warrior && ((Warrior) playerChar).getWeapon() != null) {
-                    utl.print("Weapon : " + ((Warrior) playerChar).getWeapon().getName() + "\n" +
-                            "Weapon damage : " + ((Warrior) playerChar).getWeapon().getAmount() + "\n" +
-                            "Shield defense : " + ((Warrior) playerChar).getShield().getAmount());
+                    utl.print("Weapon : " + ((Warrior) playerChar).getWeapon().getWeaponName() + "\n" +
+                            "Weapon damage : " + ((Warrior) playerChar).getWeapon().getWeaponAmount() + "\n" +
+                            "Shield defense : " + ((Warrior) playerChar).getShield().getWeaponAmount());
                 } else if (playerChar != null && playerChar instanceof Sorcerer && ((Sorcerer) playerChar).getSpell() != null) {
-                    utl.print("Spell : " + ((Sorcerer) playerChar).getSpell().getName() + "\n" +
-                            "Spell damage : " + ((Sorcerer) playerChar).getSpell().getAmount() + "\n" +
-                            "Filter defense : " + ((Sorcerer) playerChar).getFilter().getAmount());
+                    utl.print("Spell : " + ((Sorcerer) playerChar).getSpell().getWeaponName() + "\n" +
+                            "Spell damage : " + ((Sorcerer) playerChar).getSpell().getWeaponAmount() + "\n" +
+                            "Filter defense : " + ((Sorcerer) playerChar).getFilter().getWeaponAmount());
                 } else {
-                    utl.print("Coconut capacity: " + ((Coconut) playerChar).getCoconutWeapon().getName() + "\n" +
-                            "Coconut friends : " + ((Coconut) playerChar).getCoconutWeapon().getAmount() + "\n" +
-                            "Coconut defense : " + ((Coconut) playerChar).getCoconutSkin().getAmount());
+                    utl.print("Coconut capacity: " + ((Coconut) playerChar).getCoconutWeapon().getWeaponName() + "\n" +
+                            "Capacity damage : " + ((Coconut) playerChar).getCoconutWeapon().getWeaponAmount() + "\n" +
+                            "Coconut defense : " + ((Coconut) playerChar).getCoconutSkin().getWeaponAmount());
                 }
 
                 break;

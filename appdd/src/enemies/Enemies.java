@@ -3,30 +3,29 @@
  */
 package enemies;
 
-import characters.Coconut;
-import characters.Sorcerer;
-import characters.Warrior;
 import map.Slot;
-import characters.Characters;
+import characters.*;
 import utils.Utils;
 import game.Game;
 import game.Dice;
 
-/**Abstract class used to construct all enemies, commons function related to fight are here**/
+/**
+ * Abstract class used to construct all enemies, commons function related to fight are here
+ */
 public class Enemies extends Slot {
 
-    /**Enemy name**/
     private String name;
-
-    /**Enemy default HP**/
     private int health;
-
-    /**Enemy AP**/
     private int enemyAP;
 
     private Utils utl;
 
-    /**Constructors**/
+    /**
+     * Enemies Constructors
+     * @param name
+     * @param health
+     * @param enemyAP
+     */
     public Enemies(String name, int health, int enemyAP) {
         this.name = name;
         this.health = health;
@@ -34,9 +33,10 @@ public class Enemies extends Slot {
         this.utl = new Utils();
     }
 
-    /**Commons functions**/
-
-    /**Catch the enemies slot to interact & launch fightMenu()**/
+    /**
+     * Catch the enemies slot to interact & launch fightMenu()
+     * @param playerChar
+     */
     public void action(Characters playerChar) {
         utl.print("----------------------------------\n" +
                 ">> FIGHT\n" +
@@ -46,7 +46,10 @@ public class Enemies extends Slot {
         duringFight(playerChar);
     }
 
-    /**Encounter enemies events - allow the player to escape or fight.**/
+    /**
+     * Encounter enemies events - allow the player to escape or fight.
+     * @return
+     */
     public int fightMenu() {
         int playerChoice = utl.intQuestion("===========================================\n" +
                 "(1) Attack\n" +
@@ -55,7 +58,7 @@ public class Enemies extends Slot {
 
         switch (playerChoice) {
             case 1:
-                utl.print("Attacking");
+                utl.print("\u2694\uFE0F Attacking");
                 break;
             case 2:
                 utl.print("You run away");
@@ -65,7 +68,10 @@ public class Enemies extends Slot {
         return playerChoice;
     }
 
-    /**Encounter enemies events - All the fight is here (attack, defense and healths sets of char & enemies)**/
+    /**
+     * Encounter enemies events - All the fight is here (attack, defense and healths sets of char & enemies)
+     * @param playerChar
+     */
     public void duringFight(Characters playerChar) {
         int playerChoice = 0;
 
@@ -77,16 +83,16 @@ public class Enemies extends Slot {
             switch (fightMenu()) {
                 case 1:
                     if (playerChar.getClassType() == "Warrior") {
-                        this.setHealth(this.getHealth() - playerChar.attack(((Warrior) playerChar).getWeapon().getAmount()));
-                        utl.print(this.getName() + " lost " + playerChar.attack(((Warrior) playerChar).getWeapon().getAmount()) + " HP's");
+                        this.setHealth(this.getHealth() - playerChar.attack(((Warrior) playerChar).getWeapon().getWeaponAmount()));
+                        utl.print(this.getName() + " lost " + playerChar.attack(((Warrior) playerChar).getWeapon().getWeaponAmount()) + " HP's");
                     }
                     if (playerChar.getClassType() == "Sorcerer") {
-                        this.setHealth(this.getHealth() - playerChar.attack(((Sorcerer) playerChar).getSpell().getAmount()));
-                        utl.print(this.getName() + " lost " + playerChar.attack(((Sorcerer) playerChar).getSpell().getAmount()) + " HP's");
+                        this.setHealth(this.getHealth() - playerChar.attack(((Sorcerer) playerChar).getSpell().getWeaponAmount()));
+                        utl.print(this.getName() + " lost " + playerChar.attack(((Sorcerer) playerChar).getSpell().getWeaponAmount()) + " HP's");
                     }
                     if (playerChar.getClassType() == "Coconut") {
-                        this.setHealth(this.getHealth() - playerChar.attack(((Coconut) playerChar).getCoconutWeapon().getAmount()));
-                        utl.print(this.getName() + " lost " + playerChar.attack(((Coconut) playerChar).getCoconutWeapon().getAmount()) + " HP's");
+                        this.setHealth(this.getHealth() - playerChar.attack(((Coconut) playerChar).getCoconutWeapon().getWeaponAmount()));
+                        utl.print(this.getName() + " lost " + playerChar.attack(((Coconut) playerChar).getCoconutWeapon().getWeaponAmount()) + " HP's");
                     }
                     if (this.getHealth() > 0) {
                         utl.print(this.getName() + " is still alive, and hit you for " + this.getEnemyAP() + " damages");
@@ -109,7 +115,7 @@ public class Enemies extends Slot {
                 case 2:
                     Dice dice = Game.getDice();
                     //You cannot escape the boss.
-                    if (this.getName() == "Brozock") {
+                    if (this.getName() == "\uD83D\uDC32 Brozock") {
                         utl.print("\uD83D\uDCAC Aaahh, no ! You cannot run away");
                         playerChoice = 1;
                         break;
@@ -127,7 +133,6 @@ public class Enemies extends Slot {
         }
     }
 
-    /**Setters & Getters**/
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public int getHealth() { return health; }

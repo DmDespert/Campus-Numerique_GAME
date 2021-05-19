@@ -5,7 +5,7 @@ public class Tunderbolt extends Stuff {
 	
 	public Tunderbolt() {
 		
-		super("\u26A1 Tunderbolt", 2);
+		super("Tunderbolt", 2);
 	
 	}
 }

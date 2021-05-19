@@ -10,7 +10,13 @@ public class Coconut extends Characters {
     private Stuff coconutSkin;
     private Stuff potion;
 
-    /**Constructor**/
+    /**
+     * Coconut Constructor
+     * @param name
+     * @param coconutWeapon
+     * @param coconutSkin
+     * @param potion
+     */
     public Coconut(String name, Stuff coconutWeapon, Stuff coconutSkin, Stuff potion) {
         super(name, "Coconut", 40, 40, 2, 4);
         this.coconutWeapon = coconutWeapon;
@@ -18,16 +24,14 @@ public class Coconut extends Characters {
         this.potion = potion;
     }
 
-    /**Commons functions**/
-
     @Override
-    /**Specific class attack**/
+    /**
+     * Specific class attack
+     */
     public int attack(int spell) {
         int attackAmount = getMinAP() + spell;
         return attackAmount;
     }
-
-    /**Getters & Setters**/
 
     public Stuff getCoconutWeapon() { return coconutWeapon; }
     public void setCoconutWeapon(Stuff coconutWeapon) { this.coconutWeapon = coconutWeapon; }

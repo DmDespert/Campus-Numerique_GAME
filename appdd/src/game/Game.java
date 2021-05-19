@@ -9,34 +9,40 @@ import menu.Menu;
 import map.Map;
 import map.Slot;
 
+import java.sql.SQLException;
+
 /**
 *Game class contain all the stuff needed to make the game work, like :<br/>
 *- Player character (will interact with the game).<br/>
 *- Dice launch to resolve fights.<br/>
 *- Generated map that will interact with the player character moves.<br/>
- **/
+ */
 public class Game {
 
-    /**Attributes of Game**/
     private Characters playerChar;
     private Map map;
     private Utils utl;
     private Menu menu;
+    private Connexion conn;
+
     private static Dice dice = new Dice();
 
-    /**Constructors of Game**/
+    /**
+     * Game constructors
+     */
     public Game() {
 
         this.playerChar = null;
 
         this.utl = new Utils();
         this.menu = new Menu();
+        this.conn = new Connexion();
 
     }
 
-    /**Commons functions of Game**/
-
-    /**Game introduction function, also use to restart menu when exiting or dying.**/
+    /**
+     * Game introduction function, also use to restart menu when exiting or dying.
+     */
     public void introduction() {
         try {
             Thread.sleep(1000);
@@ -47,14 +53,23 @@ public class Game {
             Thread.sleep(3000);
             utl.print("\uD83D\uDCAC You walk slowly to it, inside the darkness.");
             Thread.sleep(3000);
-            if (menu.startMenu() == 1) {
-                this.playerChar = menu.createChar(playerChar);
-                generateMap();
-                gameRun();
-            } else {
-                utl.print("\uD83D\uDCAC Nope");
+            switch (menu.startMenu()) {
+                case 1:
+                    this.playerChar = menu.createChar(playerChar);
+                    generateMap();
+                    gameRun();
+                    break;
+                case 2:
+                    conn.Connexion();
+                    playerChar = conn.loadChar(playerChar);
+                    generateMap();
+                    utl.print("Loading " + playerChar.getName() + " character. Ready " + playerChar.getClassType() + " ?");
+                    gameRun();
+                    break;
+                default :
+                    utl.print("\uD83D\uDCAC Nope");
             }
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException | SQLException ex) {
             System.out.println(ex);
         }
     }
@@ -111,7 +126,7 @@ public class Game {
                         switch (menu.runMenu(playerChar)) {
                             case 1:
                                 playerChar.walk(dice.rollingDice());
-                                utl.print("Dice score : " + dice.getDice());
+                                utl.print("\uD83C\uDFB2 Dice score : " + dice.getDice());
 
                                 try {
                                     if (playerChar.getCharPosition() >= map.getMaxBox()) {
@@ -194,7 +209,6 @@ public class Game {
         return map.getMaxBox() > playerChar.getCharPosition(); /* && playerChar.getHealth() > 0;*/
     }
 
-    /**Getters & Setters**/
     public static Dice getDice() { return dice; }
 
 }

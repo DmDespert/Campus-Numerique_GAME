@@ -5,7 +5,7 @@ public class Fireball extends Stuff {
 	
 	public Fireball() {
 		
-		super("\uD83D\uDD25 Fireball", 7);
+		super("Fireball", 7);
 		
 	}
 	

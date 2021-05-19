@@ -1,4 +1,6 @@
 import game.Game;
+import java.sql.*;
+
 
 /**
  * <strong>JAVADOC APP DUNGEONS & DRAGONS</strong><br/>
@@ -32,13 +34,15 @@ import game.Game;
  *(7) Utils : Only utils used to code shortcuts and utilities.<br/>
  **/
 public class App {
-	
-	/**Main entry of app (launcher)**/
+
+	/**
+	 * Main entry of APP, and BDD connection
+	 * @param args
+	 */
 	public static void main(String [] args) {
 
 		Game game = new Game();
 		game.introduction();
 
 	}
-	
 }

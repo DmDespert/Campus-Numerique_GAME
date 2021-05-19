@@ -5,7 +5,7 @@ public class Goblins extends Enemies {
 	
 	public Goblins() {
 		
-		super("Goblin", 6, 1);
+		super("\uD83E\uDDDF Goblin", 6, 1);
 	
 	}
 

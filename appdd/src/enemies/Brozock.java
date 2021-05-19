@@ -10,7 +10,7 @@ public class Brozock extends Enemies {
 
     public Brozock() {
 
-        super("Brozock", 32, 4);
+        super("\uD83D\uDC32 Brozock", 32, 4);
 
         this.utl = new Utils();
 

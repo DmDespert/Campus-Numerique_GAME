@@ -6,30 +6,26 @@ package characters;
 import utils.Utils;
 
 abstract public class Characters {
-	
-	/**Char name**/
-	private String name;
-	
-	/**Char Class**/
-	private String classType;
-	
-	/**Char default HP**/
-	private int health;
-	
-	/**Max char HP**/
-	private int maxHealth;
-	
-	/**Char start attack power**/
-	private int minAP;
-	
-	/**Char max attack power**/
-	private int maxAP;
 
+	private String name;
+	private String classType;
+	private int health;
+	private int maxHealth;
+	private int minAP;
+	private int maxAP;
 	private int charPosition = 1;
 
-	Utils utl;
+	private Utils utl;
 
-	/**Constructors of Characters**/
+	/**
+	 * Constructors of Characters
+	 * @param name
+	 * @param classType
+	 * @param health
+	 * @param maxHealth
+	 * @param minAP
+	 * @param maxAP
+	 */
 	public Characters(String name, String classType, int health, int maxHealth, int minAP, int maxAP) {
 		this.name = name;
 		this.classType = classType;
@@ -41,15 +37,21 @@ abstract public class Characters {
 		this.utl = new Utils();
 	}
 
-	/**Commons functions**/
-
-	/**Player char walk on map action, based on dice score**/
+	/**
+	 * Player char walk on map action, based on dice score
+	 * @param dice
+	 * @return
+	 */
 	public int walk(int dice) {
 		this.charPosition = this.charPosition + dice;
 		return charPosition;
 	}
 
-	/**Player char defense function**/
+	/**
+	 * Player char defense function
+	 * @param dice
+	 * @return
+	 */
 	public int defense(int dice) {
 		int defenseAmount = 0;
 		switch(dice) {
@@ -65,15 +67,18 @@ abstract public class Characters {
 			default :
 				defenseAmount = 0;
 		}
-		utl.print("Dice score for defense " + dice);
+		utl.print("\uD83C\uDFB2 Dice score for defense " + dice);
 		utl.print("You defended your ass for " + defenseAmount + " damages");
 		return defenseAmount;
 	}
 
-	/**Abstract method of attack, based on weapon**/
+	/**
+	 * Abstract method of attack, based on weapon
+	 * @param weapon
+	 * @return
+	 */
 	public abstract int attack(int weapon);
 
-	/**Getters & Setters**/
 	public int getCharPosition() { return charPosition; }
 	public void setCharPosition(int charPosition) { this.charPosition = charPosition; }
 	public String getName() { return name; }
