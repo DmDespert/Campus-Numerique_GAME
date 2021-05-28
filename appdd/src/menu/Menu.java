@@ -143,7 +143,8 @@ public class Menu {
         switch (utl.intQuestion("===========================================\n" +
                 "(1) Go on\n" +
                 "(2) See char stats\n" +
-                "(3) Exit\n" +
+                "(3) Save char\n" +
+                "(4) Exit\n" +
                 "===========================================")) {
             case 1:
                 playerChoice = 1;
@@ -173,6 +174,9 @@ public class Menu {
 
                 break;
             case 3:
+                playerChoice = 3;
+                break;
+            case 4:
                 if (utl.intQuestion("Are you sure ? (1) Yes (2) No") == 1) {
                     playerChoice = 2;
                     break;

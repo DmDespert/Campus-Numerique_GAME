@@ -180,6 +180,10 @@ public class Game {
                             case 2:
                                 introduction();
                                 break;
+                            case 3:
+                                conn.Connexion();
+                                conn.saveChar(playerChar);
+                                utl.print("Character saved, you can now load it from the main menu.");
                         }
 
                     }
@@ -199,14 +203,14 @@ public class Game {
                     break;
             }
 
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException | SQLException ex) {
             System.out.println(ex);
         }
 
     }
 
     public boolean gameProcess() {
-        return map.getMaxBox() > playerChar.getCharPosition(); /* && playerChar.getHealth() > 0;*/
+        return map.getMaxBox() > playerChar.getCharPosition();
     }
 
     public static Dice getDice() { return dice; }

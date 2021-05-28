@@ -12,10 +12,8 @@ public class Connexion {
     private Connection con;
 
     public Connexion() {
-
         this.utl = new Utils();
         this.con = null;
-
     }
 
     /**
@@ -26,7 +24,7 @@ public class Connexion {
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/dandd", "root", "hell0w0rld");
+            con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/dandd", "root", "toto");
 
         } catch (ClassNotFoundException e) {
             System.out.print(e);
@@ -43,7 +41,6 @@ public class Connexion {
         Statement stmt = con.createStatement ();
         String query = "select * from Hero";
         boolean status = stmt.execute(query);
-        int searchChoice = 0;
 
         if(status) {
             ResultSet rs = stmt.getResultSet();
@@ -54,7 +51,7 @@ public class Connexion {
             }
 
         }
-        return searchChoice = utl.intQuestion("Choose a char");
+        return utl.intQuestion("Choose a char");
     }
 
     /**
@@ -94,7 +91,6 @@ public class Connexion {
                         case "Coconut":
                             playerChar = new Coconut(rs.getString("name"), new Default(), new CoconutSkin(), new Default());
                             break;
-
                     }
                     playerChar.setCharPosition(rs.getInt("position"));
                 }
@@ -109,12 +105,12 @@ public class Connexion {
         return playerChar;
     }
 
-}
+    public void saveChar(Characters playerChar) throws SQLException {
 
-/**
- * finally {
- *             try{
- *                 if(con != null) con.close();
- *             } catch (Exception ex){}
- *         }
- */
+        Statement stmt = con.createStatement ();
+        String query = "INSERT INTO `Hero` (`type`, `name`, `attackpower`, `defensepower`, `health`, `position`)\n" +
+                "VALUES ('"+playerChar.getClassType()+"', '"+playerChar.getName()+"', '5', '4', '"+playerChar.getHealth()+"', '"+playerChar.getCharPosition()+"');";
+        stmt.executeUpdate(query);
+    }
+
+}
